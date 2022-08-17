@@ -2,7 +2,7 @@ from typing import List, Dict
 import logging
 
 from sodapy import Socrata
-
+# this should be kept in secrets
 api_key = '16hro65lobuysqfhbqx1xn5fxjnbo4qo4k62g3v9t95xwnnlq2'
 app_token = 'FoLLVvfaxQKA5PMCwz6dkm5wq'
 username = 'somacruz@bk.ru'
@@ -15,5 +15,5 @@ CLIENT = Socrata("data.ct.gov",
 
 
 def get_data() -> List[Dict]:
-    logging.info('Getting data from %s'%CLIENT.domain)
+    logging.info('Getting data from %s' % CLIENT.domain)
     return CLIENT.get("5mzw-sjtu", limit=1000000)

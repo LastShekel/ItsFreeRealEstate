@@ -8,7 +8,7 @@ from download import get_data
 from formating import print_dict
 import pandas as pd
 
-
+# this function takes top saleratio_top cities for each year
 def _get_town(pivot: pd.DataFrame,
               column: str,
               saleratio_top: int) -> List[str]:
