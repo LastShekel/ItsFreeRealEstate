@@ -1,4 +1,5 @@
 from typing import List, Dict
+import logging
 
 from sodapy import Socrata
 
@@ -14,4 +15,5 @@ CLIENT = Socrata("data.ct.gov",
 
 
 def get_data() -> List[Dict]:
+    logging.info('Getting data from %s'%CLIENT.domain)
     return CLIENT.get("5mzw-sjtu", limit=1000000)
