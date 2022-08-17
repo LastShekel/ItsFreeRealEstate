@@ -7,7 +7,8 @@ from data_norm import real_estate
 from download import get_data
 from formating import print_dict
 import pandas as pd
-
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 # this function takes top saleratio_top cities for each year
 def _get_town(pivot: pd.DataFrame,
               column: str,
@@ -17,7 +18,7 @@ def _get_town(pivot: pd.DataFrame,
 
 def get_top_saleamount(data_df: pd.DataFrame,
                        saleratio_top: int = 10) -> Dict[int, List[str]]:
-    logging.info('Getting top saleamount for each year')
+    logger.info('Getting top saleamount for each year')
     pivot = data_df.pivot_table(index='town',
                                 columns='year',
                                 values='saleamount',
@@ -31,7 +32,7 @@ def get_top_saleamount(data_df: pd.DataFrame,
 
 def get_top_saleratio_towns(data_df: pd.DataFrame,
                             saleratio_top: int = 10) -> List[str]:
-    logging.info('Getting top saleratio')
+    logger.info('Getting top saleratio')
     gb = data_df.groupby(['town']).agg({'salesratio': max})
     return list(gb.iloc[gb['salesratio'].argsort()[-saleratio_top:]].index)
 
@@ -50,6 +51,8 @@ def main() -> None:
     saleratio_top, saleamount_top = args.saleratio, args.saleamount
     data_df = pd.DataFrame.from_records(get_data())
     data_df = real_estate(data_df)
+    logging.info('Got saleratio_top = %s, saleamount_top = %s' %
+                 (saleratio_top, saleamount_top))
     if saleratio_top:
         saleratio_top = int(args.saleratio)
         print('%s towns that have the highest '
