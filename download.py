@@ -3,7 +3,7 @@ import logging
 
 from sodapy import Socrata
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('__main__')
 logger.setLevel(logging.INFO)
 # this should be kept in secrets
 api_key = '16hro65lobuysqfhbqx1xn5fxjnbo4qo4k62g3v9t95xwnnlq2'
